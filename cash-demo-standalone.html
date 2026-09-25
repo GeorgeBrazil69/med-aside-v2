@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#00bb00">
+  <title>Cash Demo</title>
+  <style>
+:root{--green:#00bb00;--green-dark:#00a500;--black:#000;--surface:#191919;--muted:#929292;--yellow:#ffe23e;--blue:#4365ff;--radius:999px;--page-padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:#111}button,input,select{font:inherit}button{cursor:pointer;border:0;color:inherit;background:none;min-height:44px}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:3px}[hidden]{display:none!important}#app{width:100%;max-width:480px;margin:auto;position:relative;min-height:100dvh;background:var(--black)}.screen{min-height:100dvh;padding:44px var(--page-padding) max(20px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:16px}.green{background:var(--green);color:#000}.dark{background:#000;color:#fff}.light{background:#fff;color:#111;color-scheme:light}.demo-badge{position:absolute;right:20px;top:10px;z-index:3;border-radius:99px;background:#0003;color:#fff;font-size:9px;font-weight:700;letter-spacing:1.4px;padding:5px 10px;pointer-events:none}#message{position:fixed;z-index:5;top:12px;left:50%;transform:translateX(-50%);background:#fff;color:#111;padding:16px;border:2px solid #333;border-radius:16px;width:min(90%,420px);box-shadow:0 4px 24px #0005}.toolbar,.row,.note-row{display:flex;align-items:center;gap:12px}.spacer{flex:1}.round{width:44px;height:44px;border-radius:50%;background:#0001;font-size:28px;display:grid;place-items:center}.yellow{background:var(--yellow);color:#000}.scan{font-size:32px}.pill{border-radius:var(--radius);min-height:54px;padding:14px 22px;font-weight:650;font-size:18px;text-align:center;width:100%}.black{background:#000;color:#fff}.white{background:#fff;color:#000}.charcoal{background:var(--surface);color:#fff}.green-dark{background:var(--green-dark);color:#000}.row>*{flex:1}#screen-pay{height:100dvh;min-height:630px;gap:14px}#amount-display{display:flex;align-items:center;justify-content:center;flex:1;min-height:90px;font-size:clamp(46px,18vw,80px);font-weight:700;letter-spacing:-4px;overflow-wrap:anywhere}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:14px}.keypad button{height:clamp(44px,7.5dvh,66px);font-size:28px;font-weight:600;border-radius:40px}.keypad button:active{background:#0002}nav{display:flex;justify-content:space-around;padding-top:8px}nav button{width:80px;border-radius:60px;font-size:32px;color:#005f00}nav .selected{background:#0001;color:#000}.back{font-size:34px;width:44px;align-self:flex-start;line-height:1}h1{font-size:36px;line-height:1.15;letter-spacing:-1.2px;margin:12px 0 22px;overflow-wrap:anywhere}h2{font-size:24px;margin:0}.muted,.hint{color:var(--muted)}.hint{font-size:13px;line-height:1.5}.search,input,select{border:0;border-radius:16px;padding:17px;background:var(--surface);color:inherit;min-width:0;width:100%;font-size:16px}.person{display:flex;gap:16px;align-items:center;text-align:left;padding:16px 0}.person strong,.person small{display:block;overflow-wrap:anywhere}.person small{color:var(--muted);margin-top:6px}.avatar{border-radius:50%;background:var(--blue);min-width:48px;height:48px;display:grid;place-items:center;font-weight:700;font-size:22px}.chevron{margin-left:auto;font-size:30px}.note-row{margin-top:auto}.note-row input{background:transparent;padding-left:0}.note-row button{width:auto}.review-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:18px 0}.review-content p{margin:6px 0;overflow-wrap:anywhere;max-width:100%}.review-amount{font-size:clamp(36px,13vw,64px);font-weight:700;overflow-wrap:anywhere;max-width:100%}#review-artwork,#settings-artwork{width:100%;max-height:220px;object-fit:contain;border-radius:16px}.funding{margin-top:24px;padding:20px;background:var(--surface);border-radius:18px;display:flex;justify-content:space-between;width:100%;gap:12px}.result-content{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:32px 0;gap:12px}.result-content h1{margin:16px 0;font-size:32px}.warning-symbol,.success-symbol{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:52px;font-weight:700}.warning-symbol{background:var(--yellow);color:#000}.success-symbol{background:var(--green);color:#000}.failure-warning{font-size:22px;line-height:1.4;overflow-wrap:anywhere;margin:10px 0}.text-button{font-size:15px;text-decoration:underline;padding:12px;width:100%}.danger{color:#b3261e}.balance-panel{padding:24px 0}.balance-panel p{font-size:20px}#balance-display{font-size:54px;font-weight:700;margin-bottom:28px;overflow-wrap:anywhere}.info-card{padding:28px 20px;background:var(--surface);border-radius:24px;display:flex;justify-content:space-between}.bottom{margin-top:auto}form{display:flex;flex-direction:column;gap:20px}form label{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:650}form input,form select{background:#f0f0f0;color:#111}form .hint{color:#666;margin:0}.activity-item{border-bottom:1px solid #333;padding:18px 0;overflow-wrap:anywhere}.activity-item strong{display:block}.activity-item small{color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}@media(max-height:720px){.screen{padding-top:36px}#screen-pay{gap:10px}.keypad{margin-bottom:4px}.pill{min-height:48px;padding:12px 20px}.keypad button{height:44px}}
+
+</style>
+  
+  
+</head>
+<body>
+<main id="app">
+  <div class="demo-badge">PRODUCT DEMO</div>
+  <p id="message" role="status" hidden></p>
+  <!-- SCREEN 1: green amount keypad -->
+  <section id="screen-pay" class="screen green">
+    <header class="toolbar"><button data-action="settings" aria-label="Demo settings" class="round">☺</button><button data-action="scan" aria-label="Scan code" class="round scan">▦</button><span class="spacer"></span><button data-action="recipient" aria-label="Search recipient" class="round">⌕</button><button data-action="settings" aria-label="Edit demo" class="round yellow">●</button></header>
+    <output id="amount-display" aria-live="polite">$0</output>
+    <div class="keypad" aria-label="Amount keypad"><button data-digit="1">1</button><button data-digit="2">2</button><button data-digit="3">3</button><button data-digit="4">4</button><button data-digit="5">5</button><button data-digit="6">6</button><button data-digit="7">7</button><button data-digit="8">8</button><button data-digit="9">9</button><button data-digit=".">.</button><button data-digit="0">0</button><button data-action="backspace" aria-label="Delete digit">‹</button></div>
+    <div class="row"><button class="pill green-dark" data-action="pool">Pool</button><button class="pill green-dark" data-action="request">Request</button></div>
+    <button class="pill black" data-action="pay">Pay</button>
+    <nav aria-label="Main navigation"><button data-action="money" aria-label="Money">♜</button><button class="selected" data-action="home" aria-label="Pay">$</button><button data-action="activity" aria-label="Activity">◷</button></nav>
+  </section>
+  <!-- SCREEN 2: editable recipient search -->
+  <section id="screen-recipient" class="screen dark" hidden>
+    <button class="back" data-action="home" aria-label="Close">×</button>
+    <h1><span class="action-label">Pay</span> <span class="amount-label"></span> <span class="muted">to</span></h1>
+    <label class="sr-only" for="recipient-input">Recipient $cashtag</label><input id="recipient-input" class="search" placeholder="Name, $cashtag" autocomplete="off" maxlength="40">
+    <button id="recipient-result" class="person" data-action="select-recipient" hidden><span class="avatar">A</span><span><strong id="result-name"></strong><small id="result-tag"></small></span><span class="chevron">›</span></button>
+    <p class="hint">Enter any sample $cashtag for this demo.</p>
+  </section>
+  <!-- SCREEN 3: payment note -->
+  <section id="screen-note" class="screen dark" hidden>
+    <button class="back" data-action="recipient-back" aria-label="Back">←</button>
+    <h1><span class="action-label">Pay</span> <span class="amount-label"></span> <span class="muted">to</span><br><span class="name-label"></span> <span class="muted">for</span></h1>
+    <div class="note-row"><label class="sr-only" for="note-input">Payment note</label><input id="note-input" placeholder="Add a note" maxlength="200"><button class="pill white" data-action="review">Review</button></div>
+  </section>
+  <!-- SCREEN 4: review and custom cashtag artwork -->
+  <section id="screen-review" class="screen dark" hidden>
+    <button class="back" data-action="note" aria-label="Back">←</button><h2>Review</h2>
+    <div class="review-content"><div class="review-amount amount-label"></div><p>To <strong class="name-label"></strong></p><p class="tag-label muted"></p><img id="review-artwork" alt="Custom cashtag artwork" hidden><p id="review-note"></p><button class="funding" data-action="funding"><span>Cash balance</span><span id="funding-balance"></span></button><p class="hint">Simulated payment · No money moves</p></div>
+    <button id="confirm-payment" class="pill green" data-action="confirm">Pay</button>
+  </section>
+  <!-- SCREEN 5: requested failed-payment warning -->
+  <section id="screen-failed" class="screen dark result-screen" hidden>
+    <button class="back" data-action="review" aria-label="Back to review">×</button>
+    <div class="result-content"><div class="warning-symbol" aria-hidden="true">!</div><h1>Send Payment Failed</h1><p class="failure-warning">You have never sent cash to <strong id="failed-recipient"></strong></p><p class="hint">Demo scenario · No money was sent</p></div>
+    <button class="pill white" data-action="review">Back to review</button><button class="text-button" data-action="settings">Edit demo warning</button>
+  </section>
+  <!-- SCREEN 6: simulated completion -->
+  <section id="screen-success" class="screen dark result-screen" hidden><div class="result-content"><div class="success-symbol">✓</div><h1 id="success-title">Demo payment complete</h1><p>Simulated · No money moved</p></div><button class="pill white" data-action="done">Done</button></section>
+  <!-- SCREEN 7: sample balance -->
+  <section id="screen-money" class="screen dark" hidden><header class="toolbar"><h2>Money</h2><span class="spacer"></span><button class="round yellow" data-action="settings" aria-label="Edit demo">●</button></header><div class="balance-panel"><p>Cash balance</p><div id="balance-display"></div><button class="pill charcoal" data-action="settings">Edit sample balance</button></div><div class="info-card">Cash App Green <span class="muted">Demo</span></div><div class="info-card">Savings <span class="muted">$0.00</span></div><button class="pill white bottom" data-action="home">Back to keypad</button></section>
+  <!-- SCREEN 8: local simulated activity -->
+  <section id="screen-activity" class="screen dark" hidden><button class="back" data-action="home" aria-label="Back">←</button><h1>Activity</h1><div id="activity-list"></div><button class="pill white bottom" data-action="home">Back to keypad</button></section>
+  <!-- SCREEN 9: all editable demo data -->
+  <section id="screen-settings" class="screen light" hidden>
+    <button class="back" data-action="home" aria-label="Back">←</button><h1>Demo Settings</h1>
+    <form id="settings-form">
+      <label>Send amount<input name="amount" type="number" min="0" max="9999999.99" step="0.01" required></label>
+      <label>Recipient display name<input name="recipientName" maxlength="50" required></label>
+      <label>Recipient $cashtag<input name="recipientTag" maxlength="40" required></label>
+      <label>Sample cash balance<input name="balance" type="number" min="0" max="99999999" step="0.01" required></label>
+      <label>Payment result<select name="outcome"><option value="failed">Show Send Payment Failed</option><option value="success">Show simulated success</option></select></label>
+      <label>Warning name (editable)<input name="warningName" maxlength="80" placeholder="Leave blank to use recipient $cashtag"></label>
+      <p class="hint">Warning: “You have never sent cash to [warning name]”. Leave the name blank to follow the selected recipient.</p>
+      <label>Custom cashtag image<input id="artwork-input" type="file" accept="image/png,image/jpeg,image/webp"></label><img id="settings-artwork" alt="Your uploaded design" hidden><button type="button" class="text-button" data-action="remove-artwork">Remove image</button>
+      <p class="hint">Image appears on the review screen. Files stay in this browser; nothing is uploaded.</p>
+      <button class="pill black" type="submit">Save and open keypad</button><button class="pill charcoal" type="button" data-action="preview-failure">Preview failed screen</button><button class="text-button danger" type="button" data-action="reset">Reset demo</button>
+    </form>
+  </section>
+</main>
+<script>
+// Starting values. Saved browser settings override these until Reset demo is used.
+window.DEMO_DEFAULTS = {
+  amount: '0',
+  recipientName: 'Alex L.',
+  recipientTag: 'alexl',
+  balance: 1250,
+  outcome: 'failed', // 'failed' or 'success'
+  warningName: '', // Empty = use the selected recipient's $cashtag.
+  artwork: '',
+  history: []
+};
+
+</script>
+<script>
+'use strict';
+// Screen navigation, keypad, editable settings and simulated payment behavior.
+const STORAGE_KEY = 'cash-demo-standalone-v1';
+const $ = id => document.getElementById(id);
+const defaults = () => structuredClone(window.DEMO_DEFAULTS);
+let state = defaults();
+let currentScreen = 'pay';
+let action = 'Pay';
+let note = '';
+let messageTimer;
+const money = value => Number(value).toLocaleString('en-US', {style:'currency',currency:'USD'});
+const normalizeTag = value => String(value).trim().replace(/^\$+/, '').replace(/[^a-zA-Z0-9_]/g, '');
+function notify(text) { $('message').textContent=text; $('message').hidden=false; clearTimeout(messageTimer); messageTimer=setTimeout(()=>$('message').hidden=true,5500); }
+function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { notify('Your changes work now, but this browser could not save them.'); } }
+function load() {
+  try {
+    const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!data)return;
+    for(const key of ['recipientName','recipientTag','warningName'])if(typeof data[key]==='string')state[key]=data[key].slice(0,80);
+    if(Number.isFinite(data.balance)&&data.balance>=0)state.balance=data.balance;
+    if(typeof data.amount==='string'&&/^\d{1,7}(\.\d{0,2})?$/.test(data.amount))state.amount=data.amount;
+    if(['failed','success'].includes(data.outcome))state.outcome=data.outcome;
+    if(typeof data.artwork==='string'&&/^data:image\/(png|jpeg|webp);base64,/.test(data.artwork))state.artwork=data.artwork;
+    if(Array.isArray(data.history))state.history=data.history.filter(x=>x&&typeof x.tag==='string'&&Number.isFinite(x.amount)&&typeof x.action==='string').slice(0,100);
+  } catch { /* A fresh demo still works if storage is unavailable or invalid. */ }
+}
+function show(screen) {
+  currentScreen=screen;
+  document.querySelectorAll('.screen').forEach(el=>el.hidden=el.id!=='screen-'+screen);
+  render(); window.scrollTo(0,0);
+  const heading=$('screen-'+screen).querySelector('h1,h2');
+  if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}
+}
+function render() {
+  $('amount-display').textContent='$'+state.amount;
+  document.querySelectorAll('.amount-label').forEach(el=>el.textContent=money(Number(state.amount)));
+  document.querySelectorAll('.action-label').forEach(el=>el.textContent=action);
+  document.querySelectorAll('.name-label').forEach(el=>el.textContent=state.recipientName||'$'+state.recipientTag);
+  document.querySelectorAll('.tag-label').forEach(el=>el.textContent='$'+state.recipientTag);
+  $('review-note').textContent=note;
+  $('balance-display').textContent=money(state.balance);$('funding-balance').textContent=money(state.balance);
+  $('confirm-payment').textContent=action+' '+money(Number(state.amount));
+  $('failed-recipient').textContent=state.warningName.trim()||'$'+state.recipientTag;
+  for(const id of ['review-artwork','settings-artwork']) {$(id).hidden=!state.artwork;if(state.artwork)$(id).src=state.artwork;else $(id).removeAttribute('src');}
+  if(currentScreen==='activity')renderActivity();
+}
+function digit(value) {
+  if(value==='.'&&state.amount.includes('.'))return;
+  if(value!=='.'&&state.amount.includes('.')&&state.amount.split('.')[1].length>=2)return;
+  if(!state.amount.includes('.')&&value!=='.'&&state.amount.length>=7)return;
+  state.amount=state.amount==='0'&&value!=='.'?value:state.amount+value;render();save();
+}
+function start(type='Pay') {
+  if(!Number.isFinite(Number(state.amount))||Number(state.amount)<=0){notify('Enter an amount greater than zero.');return;}
+  action=type;$('recipient-input').value=state.recipientTag?'$'+state.recipientTag:'';updateRecipient();show('recipient');
+}
+function updateRecipient() {
+  const tag=normalizeTag($('recipient-input').value);$('recipient-result').hidden=!tag;
+  $('result-tag').textContent='$'+tag;
+  $('result-name').textContent=tag===state.recipientTag?state.recipientName:tag;
+  document.querySelector('.avatar').textContent=(tag[0]||'A').toUpperCase();
+}
+function selectRecipient() {
+  const tag=normalizeTag($('recipient-input').value);if(!tag){notify('Enter a sample $cashtag.');return;}
+  if(tag!==state.recipientTag)state.recipientName=tag;
+  state.recipientTag=tag;save();$('note-input').value=note;show('note');
+}
+function settings() {
+  const form=$('settings-form');for(const key of ['amount','recipientName','recipientTag','balance','outcome','warningName'])form.elements.namedItem(key).value=state[key];
+  show('settings');
+}
+function readSettings() {
+  const form=$('settings-form');if(!form.reportValidity())return false;
+  const data=new FormData(form),tag=normalizeTag(data.get('recipientTag'));
+  if(!tag){notify('Enter a valid sample $cashtag.');return false;}
+  state.amount=String(Math.round(Number(data.get('amount'))*100)/100);
+  state.balance=Math.round(Number(data.get('balance'))*100)/100;
+  state.recipientName=String(data.get('recipientName')).trim()||tag;state.recipientTag=tag;
+  state.warningName=String(data.get('warningName')).trim();state.outcome=String(data.get('outcome'));
+  save();return true;
+}
+function complete() {
+  if(state.outcome==='failed'&&action==='Pay'){show('failed');return;}
+  const amount=Number(state.amount);
+  if(!Number.isFinite(amount)||amount<=0){notify('Enter a positive amount.');show('pay');return;}
+  if(action==='Pay'&&amount>state.balance){notify('Sample balance is too low. Edit it in Demo Settings.');return;}
+  if(action==='Pay')state.balance=Math.round((state.balance-amount)*100)/100;
+  state.history.unshift({tag:'$'+state.recipientTag,amount,note,action,date:new Date().toLocaleString()});state.history=state.history.slice(0,100);save();
+  $('success-title').textContent=action==='Pay'?'Demo payment complete':'Demo request created';show('success');
+}
+function renderActivity() {
+  const list=$('activity-list');list.replaceChildren();
+  if(!state.history.length){list.textContent='Your simulated payments and requests will appear here.';return;}
+  for(const item of state.history){const row=document.createElement('div');row.className='activity-item';const title=document.createElement('strong');title.textContent=item.tag+' · '+money(item.amount);const detail=document.createElement('small');detail.textContent=item.action+' · Simulated · '+(item.date||'');const text=document.createElement('p');text.textContent=item.note||'';row.append(title,detail,text);list.append(row);}
+}
+const actions={home:()=>show('pay'),settings,money:()=>show('money'),activity:()=>show('activity'),pay:()=>start('Pay'),request:()=>start('Request'),recipient:()=>start('Pay'),'recipient-back':()=>show('recipient'),'select-recipient':selectRecipient,note:()=>show('note'),review:()=>{note=$('note-input').value;show('review');},confirm:complete,done:()=>{state.amount='0';note='';save();show('pay');},backspace:()=>{state.amount=state.amount.slice(0,-1)||'0';save();render();},funding:()=>notify('Sample balance only. Edit it using the yellow profile button.'),scan:()=>notify('Enter a sample $cashtag using Pay. Camera scanning is not part of this demo.'),pool:()=>notify('Use Pay or Request for this demo. Pool is a visual placeholder.'),'remove-artwork':()=>{state.artwork='';$('artwork-input').value='';save();render();},'preview-failure':()=>{if(readSettings())show('failed');},reset:()=>{if(confirm('Reset all sample data and remove your image?')){state=defaults();note='';action='Pay';save();show('pay');}}};
+document.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;if(button.dataset.digit!==undefined)digit(button.dataset.digit);else if(actions[button.dataset.action])actions[button.dataset.action]();});
+$('recipient-input').addEventListener('input',updateRecipient);
+$('recipient-input').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();selectRecipient();}});
+$('settings-form').addEventListener('submit',event=>{event.preventDefault();if(readSettings())show('pay');});
+$('artwork-input').addEventListener('change',event=>{
+  const file=event.target.files[0];if(!file)return;
+  if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>3*1024*1024){notify('Choose a PNG, JPG or WebP smaller than 3 MB.');event.target.value='';return;}
+  const reader=new FileReader();reader.onload=()=>{state.artwork=reader.result;save();render();};reader.onerror=()=>notify('Unable to read the image.');reader.readAsDataURL(file);
+});
+document.addEventListener('keydown',event=>{if(currentScreen!=='pay'||event.target.matches('input,select,textarea'))return;if(/^[0-9.]$/.test(event.key))digit(event.key);else if(event.key==='Backspace'){event.preventDefault();actions.backspace();}});
+load();show('pay');
+
+</script>
+</body>
+</html>

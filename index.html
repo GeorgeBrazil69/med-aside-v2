@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#00bb00">
+  <title>Cash Demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<main id="app">
+  <div class="demo-badge">PRODUCT DEMO</div>
+  <p id="message" role="status" hidden></p>
+  <!-- SCREEN 1: green amount keypad -->
+  <section id="screen-pay" class="screen green">
+    <header class="toolbar"><button data-action="settings" aria-label="Demo settings" class="round">☺</button><button data-action="scan" aria-label="Scan code" class="round scan">▦</button><span class="spacer"></span><button data-action="recipient" aria-label="Search recipient" class="round">⌕</button><button data-action="settings" aria-label="Edit demo" class="round yellow">●</button></header>
+    <output id="amount-display" aria-live="polite">$0</output>
+    <div class="keypad" aria-label="Amount keypad"><button data-digit="1">1</button><button data-digit="2">2</button><button data-digit="3">3</button><button data-digit="4">4</button><button data-digit="5">5</button><button data-digit="6">6</button><button data-digit="7">7</button><button data-digit="8">8</button><button data-digit="9">9</button><button data-digit=".">.</button><button data-digit="0">0</button><button data-action="backspace" aria-label="Delete digit">‹</button></div>
+    <div class="row"><button class="pill green-dark" data-action="pool">Pool</button><button class="pill green-dark" data-action="request">Request</button></div>
+    <button class="pill black" data-action="pay">Pay</button>
+    <nav aria-label="Main navigation"><button data-action="money" aria-label="Money">♜</button><button class="selected" data-action="home" aria-label="Pay">$</button><button data-action="activity" aria-label="Activity">◷</button></nav>
+  </section>
+  <!-- SCREEN 2: editable recipient search -->
+  <section id="screen-recipient" class="screen dark" hidden>
+    <button class="back" data-action="home" aria-label="Close">×</button>
+    <h1><span class="action-label">Pay</span> <span class="amount-label"></span> <span class="muted">to</span></h1>
+    <label class="sr-only" for="recipient-input">Recipient $cashtag</label><input id="recipient-input" class="search" placeholder="Name, $cashtag" autocomplete="off" maxlength="40">
+    <button id="recipient-result" class="person" data-action="select-recipient" hidden><span class="avatar">A</span><span><strong id="result-name"></strong><small id="result-tag"></small></span><span class="chevron">›</span></button>
+    <p class="hint">Enter any sample $cashtag for this demo.</p>
+  </section>
+  <!-- SCREEN 3: payment note -->
+  <section id="screen-note" class="screen dark" hidden>
+    <button class="back" data-action="recipient-back" aria-label="Back">←</button>
+    <h1><span class="action-label">Pay</span> <span class="amount-label"></span> <span class="muted">to</span><br><span class="name-label"></span> <span class="muted">for</span></h1>
+    <div class="note-row"><label class="sr-only" for="note-input">Payment note</label><input id="note-input" placeholder="Add a note" maxlength="200"><button class="pill white" data-action="review">Review</button></div>
+  </section>
+  <!-- SCREEN 4: review and custom cashtag artwork -->
+  <section id="screen-review" class="screen dark" hidden>
+    <button class="back" data-action="note" aria-label="Back">←</button><h2>Review</h2>
+    <div class="review-content"><div class="review-amount amount-label"></div><p>To <strong class="name-label"></strong></p><p class="tag-label muted"></p><img id="review-artwork" alt="Custom cashtag artwork" hidden><p id="review-note"></p><button class="funding" data-action="funding"><span>Cash balance</span><span id="funding-balance"></span></button><p class="hint">Simulated payment · No money moves</p></div>
+    <button id="confirm-payment" class="pill green" data-action="confirm">Pay</button>
+  </section>
+  <!-- SCREEN 5: requested failed-payment warning -->
+  <section id="screen-failed" class="screen dark result-screen" hidden>
+    <button class="back" data-action="review" aria-label="Back to review">×</button>
+    <div class="result-content"><div class="warning-symbol" aria-hidden="true">!</div><h1>Send Payment Failed</h1><p class="failure-warning">You have never sent cash to <strong id="failed-recipient"></strong></p><p class="hint">Demo scenario · No money was sent</p></div>
+    <button class="pill white" data-action="review">Back to review</button><button class="text-button" data-action="settings">Edit demo warning</button>
+  </section>
+  <!-- SCREEN 6: simulated completion -->
+  <section id="screen-success" class="screen dark result-screen" hidden><div class="result-content"><div class="success-symbol">✓</div><h1 id="success-title">Demo payment complete</h1><p>Simulated · No money moved</p></div><button class="pill white" data-action="done">Done</button></section>
+  <!-- SCREEN 7: sample balance -->
+  <section id="screen-money" class="screen dark" hidden><header class="toolbar"><h2>Money</h2><span class="spacer"></span><button class="round yellow" data-action="settings" aria-label="Edit demo">●</button></header><div class="balance-panel"><p>Cash balance</p><div id="balance-display"></div><button class="pill charcoal" data-action="settings">Edit sample balance</button></div><div class="info-card">Cash App Green <span class="muted">Demo</span></div><div class="info-card">Savings <span class="muted">$0.00</span></div><button class="pill white bottom" data-action="home">Back to keypad</button></section>
+  <!-- SCREEN 8: local simulated activity -->
+  <section id="screen-activity" class="screen dark" hidden><button class="back" data-action="home" aria-label="Back">←</button><h1>Activity</h1><div id="activity-list"></div><button class="pill white bottom" data-action="home">Back to keypad</button></section>
+  <!-- SCREEN 9: all editable demo data -->
+  <section id="screen-settings" class="screen light" hidden>
+    <button class="back" data-action="home" aria-label="Back">←</button><h1>Demo Settings</h1>
+    <form id="settings-form">
+      <label>Send amount<input name="amount" type="number" min="0" max="9999999.99" step="0.01" required></label>
+      <label>Recipient display name<input name="recipientName" maxlength="50" required></label>
+      <label>Recipient $cashtag<input name="recipientTag" maxlength="40" required></label>
+      <label>Sample cash balance<input name="balance" type="number" min="0" max="99999999" step="0.01" required></label>
+      <label>Payment result<select name="outcome"><option value="failed">Show Send Payment Failed</option><option value="success">Show simulated success</option></select></label>
+      <label>Warning name (editable)<input name="warningName" maxlength="80" placeholder="Leave blank to use recipient $cashtag"></label>
+      <p class="hint">Warning: “You have never sent cash to [warning name]”. Leave the name blank to follow the selected recipient.</p>
+      <label>Custom cashtag image<input id="artwork-input" type="file" accept="image/png,image/jpeg,image/webp"></label><img id="settings-artwork" alt="Your uploaded design" hidden><button type="button" class="text-button" data-action="remove-artwork">Remove image</button>
+      <p class="hint">Image appears on the review screen. Files stay in this browser; nothing is uploaded.</p>
+      <button class="pill black" type="submit">Save and open keypad</button><button class="pill charcoal" type="button" data-action="preview-failure">Preview failed screen</button><button class="text-button danger" type="button" data-action="reset">Reset demo</button>
+    </form>
+  </section>
+</main>
+</body>
+</html>
